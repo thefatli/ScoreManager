@@ -2,7 +2,7 @@
 
 ## 个人信息 
 <p float="left">
-  <img src="https://bkimg.cdn.bcebos.com/pic/5bafa40f4bfbfbedab642febd6a7e036afc37931b152?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080" alt="图片描述" style="float: right; margin-right: 10px; width: 150px; height: auto;" />
+  <img src="tuling.jpg" alt="图片描述" style="float: right; margin-right: 10px; width: 150px; height: auto;" />
 </p>
 
    
