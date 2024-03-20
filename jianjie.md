@@ -1,7 +1,7 @@
 # 组员介绍
 
 # 张三
-![照片](https://t8.baidu.com/it/u=3196213515,2742259465&fm=217&app=126&size=f242,150&n=0&f=JPEG&fmt=auto?s=0AA47A228AF06FA770B6354B0100E0A1&sec=1711126800&t=20c786cf898d320dc4c81705b20e7bc8)
+![照片](zhangsan.jpg)
 
 ## 自我简介
 
