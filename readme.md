@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 剑持刀子🔪
 
 ![liiiiii](https://gitee.com/thefat-lee/team7/raw/master/daozi.png)
