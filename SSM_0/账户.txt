@@ -1,0 +1,14 @@
+测试用户：
+身份：学生
+id:   1230
+username: 1230
+password: openeuler1
+
+身份：教师
+id: 1231
+username: 1231
+password: openeuler1
+
+身份：管理员
+username: admin
+password: 123
