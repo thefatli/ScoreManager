@@ -177,3 +177,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     # 端口不一样可以改
 ]
+
+
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
+
+CORS_ALLOW_HEADERS = ['Content-Type', 'Authorization']
