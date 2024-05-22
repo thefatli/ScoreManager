@@ -3,13 +3,15 @@ from django.db import models
 from django.contrib import admin
 from django.conf import settings
 
-GENDER_MALE = 'M'
-GENDER_FEMALE = 'F'
+# 性别
+GENDER_MALE = 'M'  # 性别男
+GENDER_FEMALE = 'F'  # 性别女
 GENDER_CHOICES = [
-    (GENDER_MALE, '男'),
-    (GENDER_FEMALE, '女'),
+    (GENDER_MALE, '男'),  # 男用M存储
+    (GENDER_FEMALE, '女'),  # 女用F存储
 ]
 
+# 学生年级
 GRADE_ONE = '1'
 GRADE_TWO = '2'
 GRADE_THREE = '3'
@@ -21,13 +23,20 @@ GRADE_CHOICES = [
     (GRADE_FOUR, '大四'),
 ]
 
+
 # Create your models here.
 class College(models.Model):
-    name = models.CharField(verbose_name="学院名称",max_length=100,unique=True)
-    description = models.TextField() 
+    name = models.CharField(verbose_name="学院名称", max_length=100, unique=True)
+    description = models.TextField(verbose_name="学院介绍")
+
+    class Meta:
+        verbose_name = "学院"
+        verbose_name_plural = "学院"
+        ordering = ['name']
 
     def __str__(self):
         return self.name
+
 
 # 看情况是否创建
 # class Grade(models.Model):
@@ -38,13 +47,13 @@ class College(models.Model):
 #         return f"{self.college.name} {self.name}"
 
 class Student(models.Model):
-    grade = models.CharField(max_length=1, choices=GRADE_CHOICES)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    birth_date = models.DateField(null=True, blank=True)
-    info = models.CharField(max_length=200,blank=True,null=True)
-    courses = models.ManyToManyField('Course', blank=True)
-    college = models.ForeignKey(College, on_delete=models.CASCADE, blank=True, null=True)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    grade = models.CharField(verbose_name="年级", max_length=1, choices=GRADE_CHOICES)
+    gender = models.CharField(verbose_name="性别", max_length=1, choices=GENDER_CHOICES)
+    birth_date = models.DateField(verbose_name="出生日期", null=True, blank=True)
+    info = models.CharField(verbose_name="其他", max_length=200, blank=True, null=True)
+    courses = models.ManyToManyField('Course', blank=True, verbose_name="所选课程")
+    college = models.ForeignKey(College, on_delete=models.CASCADE, blank=True, null=True, verbose_name="所属学院")
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="姓名")
 
     def __str__(self):
         return self.user.username
@@ -52,50 +61,66 @@ class Student(models.Model):
     @admin.display(ordering='user__username')
     def name(self):
         return self.user.username
-    
+
     class Meta:
+        verbose_name = "学生"
+        verbose_name_plural = "学生"
         ordering = ['user__username']
 
 
 class Teacher(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    birth_date = models.DateField(null=True, blank=True)
-    info = models.CharField(max_length=200,blank=True,null=True)
-    college = models.ForeignKey(College,on_delete=models.PROTECT,related_name="teachers", blank=True, null=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="姓名")
+    gender = models.CharField(verbose_name="性别", max_length=1, choices=GENDER_CHOICES)
+    birth_date = models.DateField(verbose_name="出生日期", null=True, blank=True)
+    info = models.CharField(verbose_name="其他", max_length=200, blank=True, null=True)
+    college = models.ForeignKey(College, on_delete=models.PROTECT, related_name="teachers", blank=True, null=True,
+                                verbose_name="所属学院")
+
     # 是否增加职称？
 
     @admin.display(ordering='user__username')
     def name(self):
         return self.user.username
-    
+
     def __str__(self):
         return self.user.username
-        
+
     class Meta:
         ordering = ['user__username']
+        verbose_name = "教师"
+        verbose_name_plural = "教师"
+
 
 class Course(models.Model):
-    grade = models.CharField(max_length=1, choices=GRADE_CHOICES)
-    college = models.ForeignKey(College, verbose_name="所属学院", related_name='courses', null=True, on_delete=models.CASCADE)
+    grade = models.CharField(verbose_name="年级", max_length=1, choices=GRADE_CHOICES)
+    college = models.ForeignKey(College, verbose_name="所属学院", related_name='courses', null=True,
+                                on_delete=models.CASCADE)
     # 名字设置为unqiue? 或者grade和name unique together？
-    name = models.CharField(max_length=255)
-    point = models.FloatField(verbose_name="学分",null=False)
+    name = models.CharField(verbose_name="课程名", max_length=255)
+    point = models.FloatField(verbose_name="学分", null=False)
     students = models.ManyToManyField(Student, verbose_name="学生姓名", through='Enrollment')
     teacher = models.ForeignKey(Teacher, verbose_name="教师姓名", on_delete=models.CASCADE)
-    # 或许可以添加总分？或者默认总分100？ 
+
+    # 或许可以添加总分？或者默认总分100？
+
+    class Meta:
+        verbose_name = '课程'
+        verbose_name_plural = '课程'
 
     def __str__(self):
         return self.name
 
+
 class Enrollment(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE,related_name='items')
-    score = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, default=None)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name="学生")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='items', verbose_name="课程")
+    score = models.DecimalField(verbose_name="分数", max_digits=4, decimal_places=2, null=True, blank=True,
+                                default=None)
 
     class Meta:
         unique_together = [['student', 'course']]
+        verbose_name = "学生-课程"
+        verbose_name_plural = "学生-课程"
 
     def __str__(self):
         return f"{self.student} - {self.course}"
-
