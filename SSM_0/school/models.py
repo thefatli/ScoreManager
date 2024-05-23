@@ -11,6 +11,7 @@ GENDER_CHOICES = [
     (GENDER_FEMALE, '女'),  # 女用F存储
 ]
 
+
 # 学生年级
 GRADE_ONE = '1'
 GRADE_TWO = '2'
