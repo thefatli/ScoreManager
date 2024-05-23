@@ -32,7 +32,7 @@
       </div>
 
     </div>
-
+ 
     <div class="card">
       <el-pagination v-model:current-page="data.pageNum" v-model:page-size="data.pageSize"
                      @current-change="handelCurrentChange"
