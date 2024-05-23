@@ -12,6 +12,7 @@ class CollegeAdmin(admin.ModelAdmin):
     search_fields = ['name']
 admin.site.register(College,CollegeAdmin)
 
+
 #学生表
 class StudentAdmin(admin.ModelAdmin):
     # 定义列表页从左到右显示学号，姓名，学院
