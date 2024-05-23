@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import College,Student,Teacher,Course,Enrollment
 from django import forms
 
+
 # Register your models here.
 #学院表
 class CollegeAdmin(admin.ModelAdmin):
