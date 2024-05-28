@@ -14,8 +14,20 @@ IDENTIFICATION_CHOICES = [
 
 # Create your models here.
 class User(AbstractUser):
-    username = models.CharField(verbose_name="用户名称",max_length=100,unique=True)
-    identified_check = models.CharField(max_length=1, choices=IDENTIFICATION_CHOICES, default=STUDENT)
-    image = models.ImageField(upload_to='core/images', validators=[validate_file_size],default='core/images/default.png')
+    username = models.CharField(
+        verbose_name="用户名称",
+        max_length=100,
+        unique=True
+        )
+    identified_check = models.CharField(
+        max_length=1, 
+        choices=IDENTIFICATION_CHOICES, 
+        default=STUDENT
+        )
+    image = models.ImageField(
+        upload_to='core/images', 
+        validators=[validate_file_size],
+        default='core/images/default.png'
+        )
 
     
