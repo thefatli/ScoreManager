@@ -102,6 +102,9 @@ class UserProfileViewSet(viewsets.ViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
+        else:
+            # 如果请求方法不是 GET 或 PUT，返回不支持的请求方法
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 class StudentCreateView(CreateModelMixin, GenericAPIView):
