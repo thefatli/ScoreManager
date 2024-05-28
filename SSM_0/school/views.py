@@ -102,6 +102,8 @@ class UserProfileViewSet(viewsets.ViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
+        else:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 class StudentCreateView(CreateModelMixin, GenericAPIView):
