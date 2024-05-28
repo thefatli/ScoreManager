@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import College,Student,Teacher,Course,Enrollment
 from django import forms
 
-
 # Register your models here.
 #学院表
 class CollegeAdmin(admin.ModelAdmin):
@@ -12,7 +11,6 @@ class CollegeAdmin(admin.ModelAdmin):
     search_fields = ['name']
 admin.site.register(College,CollegeAdmin)
 
-
 #学生表
 class StudentAdmin(admin.ModelAdmin):
     # 定义列表页从左到右显示学号，姓名，学院
@@ -21,7 +19,7 @@ class StudentAdmin(admin.ModelAdmin):
     list_display_links = ('student_id', 'name')
     # 设置表按学号升序排序
     ordering = ('id',)
-    # 设置编辑页从上到下显示姓名，性别，出生日期，年级，所属学院，其他
+    # 设置编辑页从上到下显示姓名，性别，出生日期，年级，所属学院，所选课程，其他
     fields = ['user', 'gender', 'birth_date', 'grade', 'college','info']
     #按年级，学院，性别分类
     list_filter = ['college','grade','gender']
@@ -58,7 +56,7 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 admin.site.register(Course,CourseAdmin)
-#
+
 #学生-课程
 class EnrollmentAdmin(admin.ModelAdmin):
     list_display = ['student','course','score']

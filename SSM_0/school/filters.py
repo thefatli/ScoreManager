@@ -1,6 +1,6 @@
 from django_filters import FilterSet
 from .models import Student, Teacher
-# 提高复用性？
+
 class StudentFilter(FilterSet):
     class Meta:
         model = Student

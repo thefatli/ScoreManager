@@ -7,10 +7,6 @@ from school.models import Student, Teacher
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_profile_for_new_user(sender, instance, created, **kwargs):
     if created:
-        if instance.identified_check == 'S':
-            Student.objects.create(user=instance)
-        elif instance.identified_check == 'T':
-            Teacher.objects.create(user=instance)
-        elif instance.identified_check == 'A':
+        if instance.identified_check == 'A':
             instance.is_staff = True
             instance.save()

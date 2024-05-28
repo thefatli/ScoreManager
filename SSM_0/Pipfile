@@ -3,6 +3,21 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[[source]]
+url = "https://pypi.aliyun.com/simple"
+verify_ssl = true
+name = "pypialiyun"
+
+[[source]]
+url = "https://pypi.aliyun.com/simple"
+verify_ssl = true
+name = "pypialiyun"
+
+[[source]]
+url = "https://mirrors.aliyun.com/pypi/simple/"
+verify_ssl = true
+name = "mirrorsaliyun"
+
 [packages]
 django = "*"
 django-debug-toolbar = "*"
@@ -12,6 +27,7 @@ django-filter = "*"
 djoser = "*"
 djangorestframework-simplejwt = "*"
 django-cors-headers = "*"
+pillow = {version = "*", index = "mirrorsaliyun"}
 
 [dev-packages]
 autopep8 = "*"
